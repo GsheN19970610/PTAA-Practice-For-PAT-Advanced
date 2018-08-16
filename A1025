@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+	
+struct Student
+	{
+	char id[15];
+	int score;
+	int location_number;
+	int local_rank;
+	}stu[30010];
+	bool cmp(Student a,Student b){							//这里用Student 而不是stu
+		if(a.score!=b.score) return a.score>b.score;		//不等的时候,按从成绩大到小
+		else return strcmp(a.id,b.id)<0;					//相等的时候按照学号小到大
+	}
+int main()
+{
+	int i,j;
+	int n,k,num=0;								
+	scanf("%d",&n);											//考场数量			
+	for(i=1;i<=n;i++)
+	{
+		scanf("&d",&k);										//当前考场学生数量
+		for(j=0;j<k;j++)
+		{
+			scanf("%s %d",stu[num].id,&stu[num].score);		//输入学号成绩
+			stu[num].location_number=i;						//考场号
+			num++;											//学生总编号
+		}
+		sort(stu+num-k,stu+num,cmp);
+		stu[num-k].local_rank=1;
+		for(j=num-k+1;j<num;j++)							//这里+1第一是"对考场内剩余的考生",第二是下面需要用到-1
+		{
+			if(stu[j].score==stu[j-1].score){
+				stu[j].local_rank=stu[j-1].local_rank;}
+			else{
+				stu[j].local_rank=j-(num-k)+1;}
+		}
+
+	}
+	printf("%d\n",num);
+	sort(stu,stu+num,cmp);	//将所有考生排序
+	int r=1;				//把第一个排名设置成为1
+	for(i=0;i<num;i++)
+	{
+		if(i>0&&stu[i].score!=stu[i-1].score){		//当下一个成绩不等于上一个的时候将会
+		r=i+1;}										//就"更新一次"r的值
+		printf("%s ",stu[i].id);
+		printf("%d %d %d\n",r,stu[i].location_number,stu[i].local_rank);
+	}
+	return 0;
+}
