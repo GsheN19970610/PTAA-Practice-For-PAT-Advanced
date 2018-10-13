@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdbool.h>
+int main()
+{
+	int n;
+	int minLen=266,count=0;
+	char s[100][266];
+	scanf("%d",&n);
+	getchar();					//在读入n之后要用getchar接受后面的换行符防止第一个字符串读取错误
+	int i,j,len,temp;
+	for(i=0;i<n;i++)
+	{
+		gets(s[i]);				//由于字符串之内很有可能带有空格,所以不能用scanf
+		len=strlen(s[i]);
+		if(len<minLen)
+			minLen=len;
+		for(j=0;j<len/2;j++)
+		{
+			temp=s[i][j];
+			s[i][j]=s[i][len-j-1];
+			s[i][len-j-1]=temp;
+		}
+	}
+	char c;
+	bool same=true;
+	for(i=0;i<minLen;i++)
+	{
+		c=s[0][i];
+		for(j=1;j<n;j++)
+		{
+			if(c!=s[j][i])
+			{
+				same=false;
+				break;
+			}
+		}
+		if(same!=0) count++;
+		else break;
+	}
+	if(count!=0)
+	{
+		for(i=count-1;i>=0;i--)
+			printf("%c",s[0][i]);
+	}
+	else
+	{
+		printf("nai");
+	}
+	return 0;
+}
