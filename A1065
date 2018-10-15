@@ -1,0 +1,22 @@
+#include<stdio.h>                     //练习册P23
+int main()
+{
+	long long a,b,c,res;
+	int T,i;
+	scanf("%d",&T);
+	for(i=1;i<=T;i++)
+	{
+		scanf("%lld %lld %lld",&a,&b,&c);
+		res=a+b;                          //注意这里res要直接算出来,不能在if里面比较
+		if(a>0&&b>0&&res<0)               //溢出值为[-2^63,-2]    
+			printf("Case #%d: true\n",i);   //正加正如果为负,代表溢出但是c不会溢出,所以直接判断
+		else if(a<0&&b<0&&res>=0)         //这里是res>=0 ,由于这里溢出值的区间为[0,2^63)  
+			printf("Case #%d: false\n",i);  //同理直接判断
+		else if(res>c)
+			printf("Case #%d: true\n",i);
+		else
+			printf("Case #%d: false\n",i);
+	}
+	return 0;
+}
+
