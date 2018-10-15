@@ -1,0 +1,38 @@
+#include<stdio.h>
+const int N=54;
+char mp[5]={'S','H','C','D','J'};
+int main()
+{
+	int start[N+1],next[N+1],end[N+1];
+	int i,j,K;
+	scanf("%d",&K);
+	for(i=1;i<=N;i++)
+	{
+		start[i]=i;											//1.1
+	}
+	for(i=1;i<=N;i++)
+	{
+		scanf("%d",&next[i]);		//int型的要用&;			//1.2 这俩不能写在同一个循环下
+	}
+
+	for(i=0;i<K;i++)
+	{
+		for(j=1;j<=N;j++)
+		{
+			end[next[j]]=start[j];							//2.1
+		}
+		for(j=1;j<=N;j++)
+		{
+			start[j]=end[j];								//2.2这俩也是
+		}
+
+	}
+	for(i=1;i<=N;i++)
+	{
+		if(i!=1) printf(" ");
+		start[i]--;
+		printf("%c%d",mp[start[i]/13],start[i]%13+1);
+	}
+	return 0;
+}
+
