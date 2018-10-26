@@ -1,0 +1,35 @@
+#include<stdio.h>
+const int max_n=1111;
+int main()
+{
+	int i,e,n;
+	double k;									//k用f
+	int count=0;
+	double p[1111]={0};       //这里可以用p[max_n]
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d %lf",&e,&k);
+		p[e]+=k;
+	}
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d %lf",&e,&k);
+		p[e]+=k;
+	}
+	for(i=0;i<max_n;i++)
+	{
+		if(p[i]!=0)
+			count++;
+	}
+	printf("%d",count);
+	for(i=max_n-1;i>=0;i--)
+	{
+		if(p[i]!=0)
+		{
+			printf(" %d %.1f",i,p[i]);				//这里是.1f
+		}
+	}
+	return 0;
+}
