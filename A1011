@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char ans[3]={'W','T','L'};
+	int idx;
+	double sum=1.0;
+	double n;
+	double temp;
+	int i,j;
+	for(i=0;i<3;i++)
+	{
+		temp=0.0;
+		for(j=0;j<3;j++)
+		{
+			scanf("%lf",&n);
+			if(n>temp)			
+			{
+				temp=n;								//注意这里double型要等于double,int等于int
+				idx=j;
+			}	
+		}
+		printf("%c ",ans[idx]);
+		sum=sum*temp;
+	}	
+	printf("%.2lf",(sum*0.65-1)*2);	
+	return 0;
+}
