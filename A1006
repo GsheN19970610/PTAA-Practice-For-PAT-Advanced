@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+
+using namespace std;
+
+struct pNode{
+	char id[20];
+	int hh,mm,ss;
+}temp,Time1,Time2;
+
+bool great(pNode node1,pNode node2)
+{
+	if(node1.hh!=node2.hh)	return node1.hh>node2.hh;	//在不相等的情况下,当node1的hh大于node2,则返回true,反之false,若相等则进行下一步
+	else if(node1.mm!=node2.mm)	return node1.mm>node2.mm;
+	else return node1.ss>node2.ss;
+}
+
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int i;
+	Time1.hh=23,Time1.mm=59,Time1.ss=59;
+	Time2.hh=0,Time2.mm=0,Time2.ss=0;
+	for(i=0;i<n;i++)
+	{
+		scanf("%s %d:%d:%d",temp.id,&temp.hh,&temp.mm,&temp.ss);
+		if(great(temp,Time1)==false)	
+			Time1=temp;
+		scanf("%d:%d:%d",&temp.hh,&temp.mm,&temp.ss);		//再比较一次离开的时间的(会直接覆盖原来的)
+		if(great(temp,Time2)==true)
+			Time2=temp;
+	}
+	printf("%s %s\n",Time1.id,Time2.id);
+	return 0;
+}
