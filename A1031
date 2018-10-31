@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char str[100];
+	char ans[40][40];
+	gets(str);
+	int len;
+	len=strlen(str);
+	int n1,n2,n3;
+	n1=(len+2)/3;
+	n3=n1;
+	n2=len+2-n3-n1;
+	int i,j;
+	for(i=1;i<=n1;i++)					//初始化,把所有格子改成空格
+	{
+		for(j=1;j<=n2;j++){
+			ans[i][j]=' ';}
+	}
+	int count=0;
+	for(i=1;i<=n1;i++)
+	{
+		ans[i][1]=str[count++];
+	}
+	for(j=2;j<=n2;j++)					//这里要从i=1开始,最左端已经写了
+	{
+		ans[n1][j]=str[count++];
+	}
+	for(i=n3-1;i>=1;i--)				//这里要从n1-2开始,最下面也已经写了
+	{
+		ans[i][n2]=str[count++];
+	}
+	for(i=1;i<=n1;i++)
+	{
+		for(j=1;j<=n2;j++){
+			printf("%c",ans[i][j]);}
+		printf("\n");
+	}
+	return 0;
+}
