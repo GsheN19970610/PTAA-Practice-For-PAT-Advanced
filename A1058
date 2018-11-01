@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+	int a1,b1,c1;
+	int a2,b2,c2;
+	int carry;
+	int a,b,c;
+	scanf("%d.%d.%d %d.%d.%d",&a1,&b1,&c1,&a2,&b2,&c2);
+	c=(c1+c2)%29;
+	carry=(c1+c2)/29;
+	b=(b1+b2+carry)%17;
+	carry=(b1+b2+carry)/17;
+	a=a1+a2+carry;
+	printf("%d.%d.%d",a,b,c);
+	return 0;
+}
+
+//这道题可以直接转换成绝对值相加然后做
