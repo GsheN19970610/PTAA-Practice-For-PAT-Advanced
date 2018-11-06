@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+const int maxn=1010;
+int change(char c)
+{
+	if(c>='0'&&c<='9') return c-'0';
+	if(c>='a'&&c<='z') return c-'a'+10;
+	if(c>='A'&&c<='Z') return c-'A'+36;
+}
+
+int main()
+{
+	int hashTable[80]={0};
+	char whole[maxn];
+	char target[maxn];
+	gets(whole);
+	gets(target);
+	int len1,len2;
+	len1=strlen(whole);
+	len2=strlen(target);
+	int i,miss=0;
+	int temp;
+	for(i=0;i<len1;i++)
+	{
+		temp=change(whole[i]);
+		hashTable[temp]++;
+	}
+	for(i=0;i<len2;i++)
+	{
+		temp=change(target[i]);
+		hashTable[temp]--;
+		if(hashTable[temp]<0)
+			miss++;
+	}
+	if(miss>0)
+		printf("No %d",miss);
+	else
+		printf("Yes %d",len1-len2);
+	return 0;
+}
+
