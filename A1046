@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,i;
+	int num[100010]={0},dis[100010]={0};
+	int count=0;
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",&num[i]);
+		count+=num[i];
+		dis[i]=count;
+	}
+	int m,a,b,sum;
+	scanf("%d",&m);
+	for(i=1;i<=m;i++)
+	{
+		scanf("%d %d",&a,&b);
+		if(a>b) swap(a,b);
+		sum=dis[b-1]-dis[a-1];
+		printf("%d\n",min(sum,count-sum));
+	}
+	return 0;
+}
