@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main()
+{
+	int judge=1;
+	int HashTable[10010]={0};
+	int i,n,sum,temp;
+	scanf("%d %d",&n,&sum);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&temp);
+		HashTable[temp]++;
+	}
+	for(i=0;i<sum;i++)								//注意这里要写i<sum,如果写10010,会碰见sum为14时出现一个-1和15(-1的初设值就是1这种尴尬的情况)
+	{
+		if(HashTable[i]!=0 && HashTable[sum-i]!=0)
+		{			
+			if(i==sum-i&&HashTable[i]==1)
+				continue;
+			printf("%d %d",i,sum-i);
+			judge=0	;								//可以在这里写一个return 0,就不用写break和judge,接下去的东西也不会再读了
+			break;			
+		}
+	}
+	if(judge==1)
+		printf("No Solution");
+	return 0;
+}
