@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+//#include<stdbool.h>				//注意在PAT编译器如果无法编译bool的时候需要加上这个头文件
+int main()
+{
+	char str1[10010],str2[10010];
+	bool HashTable[128];			//注意如果引用了iostream,using namespace std,就不要使用hash这种变量.
+	int i;
+	gets(str1);
+	gets(str2);
+	int len1,len2;
+	len1=strlen(str1);
+	len2=strlen(str2);
+	for(i=0;i<len2;i++)
+	{
+		HashTable[str2[i]]=true;
+	}
+	for(i=0;i<len1;i++)
+	{
+		if(HashTable[str1[i]]==false)
+		{
+			printf("%c",str1[i]);
+		}
+	}
+	return 0;
+}
