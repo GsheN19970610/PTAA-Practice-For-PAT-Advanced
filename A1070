@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<algorithm>
+
+using namespace std;
+
+struct mooncake{          //结构体
+	double store;
+	double sell;
+	double price;
+}cake[1010];
+
+bool cmp(mooncake a,mooncake b){  //设置排序方式:按照单价从大到小
+	return a.price>b.price;
+}
+
+int main()
+{
+	int n,i;
+	double need;
+	scanf("%d %lf",&n,&need);
+	for(i=0;i<n;i++)
+	{
+		scanf("%lf",&cake[i].store);
+	}
+	for(i=0;i<n;i++)
+	{
+		scanf("%lf",&cake[i].sell);
+	}
+	for(i=0;i<n;i++)
+	{
+		cake[i].price=cake[i].sell/cake[i].store;   //计算单价
+	}
+	sort(cake,cake+n,cmp);        //排序
+	double sum=0;
+	for(i=0;i<n;i++)
+	{
+		if(need<cake[i].store)    //如果库存大于需要的,就直接用需要的乘以单价
+		{
+			sum+=need*cake[i].price;
+			break;
+		}
+		else                      //如果不够,就全部卖出,然后把所需的减一减
+		{
+			sum+=cake[i].sell;
+			need-=cake[i].store;
+		}
+	}
+	printf("%.2lf",sum);
+	return 0;
+}
