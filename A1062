@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+
+struct student{
+	char id[10];
+	int de,cai,sum;					
+	int flag;						//5类学生
+}stu[100010];
+
+bool cmp(student a,student b){
+	if(a.flag!=b.flag) return a.flag<b.flag;
+	else if(a.sum!=b.sum)	return a.sum>b.sum;
+	else if(a.de!=b.de)	return a.de>b.de;
+	else return strcmp(a.id,b.id)<0;					//这里不能直接比较a<b,这里是char型
+}
+
+int main()
+{
+	int n,H,L,i;
+	scanf("%d %d %d",&n,&L,&H);
+	int m=n;
+	for(i=0;i<n;i++)
+	{
+		scanf("%s %d %d",stu[i].id,&stu[i].de,&stu[i].cai);
+		stu[i].sum=stu[i].cai+stu[i].de;
+		if(stu[i].de<L || stu[i].cai<L)
+		{
+			stu[i].flag=5;
+			m--;
+		}
+		else if(stu[i].de>=H && stu[i].cai>=H)	stu[i].flag=1;
+		else if(stu[i].de>=H && stu[i].cai>=L)	stu[i].flag=2;
+		else if(stu[i].de>=stu[i].cai)	stu[i].flag=3;				//这里不用大于等于就会答案错误,没有包含所有情况
+		else stu[i].flag=4;
+	}
+	sort(stu,stu+n,cmp);
+	printf("%d\n",m);
+	for(i=0;i<m;i++){
+		printf("%s %d %d\n",stu[i].id,stu[i].de,stu[i].cai);
+	}
+	return 0;
+}
